@@ -15,6 +15,7 @@ export default function About() {
     >
       <SectionHeading>About me</SectionHeading>
 
+      // Replace the existing paragraphs with this:
       <p className="mb-3">
         After graduating with a degree in{" "}
         <span className="font-medium">Electrical Engineering</span>, I decided to pursue my
@@ -34,11 +35,11 @@ export default function About() {
       </p>
 
       <p>
-        <span className="italic">When I'm not coding</span>, I enjoy playing
+        <span className="italic">When I&apos;m not coding</span>, I enjoy playing
         video games, watching movies, and playing with my dog. For upskilling, I{" "}
-        <span className="font-medium">learning new things in tech industry</span>. I'm currently
+        <span className="font-medium">learning new things in tech industry</span>. I&apos;m currently
         learning about{" "}
-        <span className="font-medium">Machine Learning , Docker and AWS</span>. I'm also
+        <span className="font-medium">Machine Learning , Docker and AWS</span>. I&apos;m also
         learning how to play the guitar.
       </p>
     </motion.section>

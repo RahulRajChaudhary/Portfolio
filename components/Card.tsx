@@ -4,6 +4,17 @@ import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { projects } from "@/lib/data";
 
+// Define project type
+type Project = {
+  title: string;
+  description: string;
+  tags: readonly string[];
+  imageUrl: string;
+  videoUrl?: string;
+  demoUrl?: string;
+  githubUrl?: string;
+};
+
 export default function Card() {
   return (
     <div className="flex flex-wrap justify-center gap-6 mt-8 px-4">
@@ -14,7 +25,7 @@ export default function Card() {
   );
 }
 
-function ProjectCard({ project, index }: { project: any; index: number }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 

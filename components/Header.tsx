@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion, MotionValue, useSpring, useTransform, useMotionValue } from 'framer-motion';
+import { AnimatePresence, motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
 import { links as rawLinks } from "@/lib/data";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 

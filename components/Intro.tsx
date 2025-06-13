@@ -9,11 +9,11 @@ import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 
 export default function Intro() {
   const { scrollToSection } = useSmoothScroll();
-  
+
   return (
-    <section 
-      id="home" 
-      className ="mt-6 scroll-mt-16 flex flex-col justify-between min-h-screen max-w-[50rem] text-center mx-auto"
+    <section
+      id="home"
+      className="mt-6 scroll-mt-16 flex flex-col justify-between min-h-screen max-w-[50rem] text-center mx-auto"
     >
       {/* Main content container */}
       <div className="flex flex-col items-center w-full mt-8 sm:mt-0">
@@ -45,7 +45,7 @@ export default function Intro() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-6 text-center z-10 !leading-[1.5] px-4">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-            Hi, I'm <span className="text-black">Rahul Raj</span>
+            Hi, I&apos;m <span className="text-black">Rahul Raj</span>
           </h1>
           <h1 className="mt-2 text-lg md:text-xl text-gray-600 max-w-xl mx-auto">
             A passionate  <span className="relative">

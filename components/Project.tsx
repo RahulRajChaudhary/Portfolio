@@ -16,7 +16,7 @@ export default function Project() {
       >
         <SectionHeading>Projects</SectionHeading>
         <p className="mt-2 text-lg text-neutral-600 max-w-2xl mx-auto">
-          Here are a few projects I've worked on recently. Each showcases my skills in creating 
+          Here are a few projects I&apos;ve worked on recently. Each showcases my skills in creating
           performant, responsive web applications with modern technologies.
         </p>
       </motion.div>
