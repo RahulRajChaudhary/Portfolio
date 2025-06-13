@@ -15,7 +15,7 @@ export default function About() {
     >
       <SectionHeading>About me</SectionHeading>
 
-      // Replace the existing paragraphs with this:
+
       <p className="mb-3">
         After graduating with a degree in{" "}
         <span className="font-medium">Electrical Engineering</span>, I decided to pursue my
