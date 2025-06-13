@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion, useSpring, useTransform, useMotionValue } from 'framer-motion';
+import { 
+  motion, 
+  useSpring, 
+  useTransform, 
+  useMotionValue,
+  type MotionValue,
+  AnimatePresence,
+} from 'framer-motion';
 import { links as rawLinks } from "@/lib/data";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
@@ -89,7 +96,7 @@ function IconContainer({
   el,
   scrollToSection
 }: {
-  mouseX: any;
+  mouseX: MotionValue<number>;
   el: ProcessedLink;
   scrollToSection: (id: string) => void;
 }) {
