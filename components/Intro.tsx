@@ -2,16 +2,18 @@
 import Image from 'next/image'
 import React from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import { BsArrowRight, BsGithub, BsLinkedin } from 'react-icons/bs'
 import { HiDownload } from 'react-icons/hi'
 import { Scroller } from '@/components/Scroller'
+import { useSmoothScroll } from '@/hooks/useSmoothScroll'
 
 export default function Intro() {
+  const { scrollToSection } = useSmoothScroll();
+  
   return (
     <section 
       id="home" 
-      className ="mt-6 scroll-mt-6 flex flex-col justify-between min-h-screen max-w-[50rem] text-center mx-auto"
+      className ="mt-6 scroll-mt-16 flex flex-col justify-between min-h-screen max-w-[50rem] text-center mx-auto"
     >
       {/* Main content container */}
       <div className="flex flex-col items-center w-full mt-8 sm:mt-0">
@@ -89,13 +91,17 @@ export default function Intro() {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 z-10 px-4"
         >
-          <Link
+          <a
             href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("contact");
+            }}
             className="group bg-gray-900 text-white px-4 py-2 sm:py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
           >
             Contact Me
             <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
-          </Link>
+          </a>
 
           <a
             href="/Rahul_Raj_CV.pdf"

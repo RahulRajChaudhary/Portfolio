@@ -18,7 +18,7 @@ export default function Skills() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5 }}
-      className='mb-24 max-w-[53rem] scroll-mt-16 md:scroll-mt-20 text-center mx-auto px-4 py-8 sm:mb-28'
+      className='mb-24 max-w-[53rem] scroll-mt-16 md:scroll-mt-20 text-center mx-auto px-4 py-26 sm:mb-28'
       id="skills">
 
       <SectionHeading>Skills</SectionHeading>

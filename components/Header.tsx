@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion, MotionValue, useSpring, useTransform, useMotionValue } from 'framer-motion';
-import Link from 'next/link';
 import { links as rawLinks } from "@/lib/data";
-
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 // Icons
 import { RiHome6Line, RiGogglesLine, RiMenu3Line, RiCloseLine } from 'react-icons/ri';
@@ -43,7 +42,6 @@ const getIconByName = (name: string, className: string = "w-6 h-6 text-neutral-6
   }
 };
 
-
 const DesktopNav = () => {
   const links: ProcessedLink[] = rawLinks.map((link: LinkItem) => ({
     name: link.name,
@@ -52,6 +50,7 @@ const DesktopNav = () => {
   }));
 
   const mouseX = useMotionValue(Infinity);
+  const { scrollToSection } = useSmoothScroll();
 
   const getRevealOrder = (index: number, total: number) => {
     const center = (total - 1) / 2;
@@ -77,9 +76,8 @@ const DesktopNav = () => {
             damping: 12,
             duration: 0.5,
           }}
-          
         >
-          <IconContainer key={el.name} mouseX={mouseX} el={el} />
+          <IconContainer key={el.name} mouseX={mouseX} el={el} scrollToSection={scrollToSection} />
         </motion.div>
       ))}
     </motion.div>
@@ -89,9 +87,11 @@ const DesktopNav = () => {
 function IconContainer({
   mouseX,
   el,
+  scrollToSection
 }: {
   mouseX: any;
   el: ProcessedLink;
+  scrollToSection: (id: string) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -123,7 +123,13 @@ function IconContainer({
   });
 
   return (
-    <Link href={el.href}>
+    <a
+      href={el.href}
+      onClick={(e) => {
+        e.preventDefault();
+        scrollToSection(el.href.substring(1));
+      }}
+    >
       <motion.div
         ref={ref}
         style={{ width, height }}
@@ -147,15 +153,14 @@ function IconContainer({
           {el.icon}
         </motion.div>
       </motion.div>
-    </Link>
+    </a>
   );
 }
 
-
-// Mobile Navigation Component
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const { scrollToSection } = useSmoothScroll();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -248,9 +253,13 @@ const MobileMenu = () => {
                 whileTap={{ scale: 0.95 }}
                 className="origin-right"
               >
-                <Link
+                <a
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(link.href.substring(1));
+                    setIsOpen(false);
+                  }}
                   className="flex items-center justify-end space-x-2 w-full bg-white rounded-full shadow-md px-4 py-2"
                 >
                   <span className="text-neutral-600 text-sm font-medium">
@@ -259,7 +268,7 @@ const MobileMenu = () => {
                   <div className="w-8 h-8 flex items-center justify-center">
                     {link.icon}
                   </div>
-                </Link>
+                </a>
               </motion.div>
             ))}
           </motion.div>
@@ -269,7 +278,6 @@ const MobileMenu = () => {
   );
 };
 
-// Main Header Component
 export default function Header() {
   return (
     <motion.header

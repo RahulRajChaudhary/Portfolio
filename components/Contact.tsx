@@ -23,7 +23,7 @@ export default function Contact() {
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       <SectionHeading>Contact</SectionHeading>
-      <p className='text-gray-600 -mt-6'>Please contact me directly at {" "}
+      <p className='text-gray-600 -mt-4'>Please contact me directly at {" "}
         <a href="mailto:rrajchaudhary.hajipur@gmail.com" className="underline">rrajchaudhary.hajipur@gmail.com</a> {" "}
         or through this form.</p>
       
@@ -76,7 +76,7 @@ function SubmitButton() {
     <button 
       type="submit" 
       disabled={pending}
-      className='group bg-gray-900 w-[max-content] text-white px-4 py-2 inline-flex items-center gap-1 rounded-full focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 disabled:scale-100 disabled:bg-opacity-70'
+      className='group bg-gray-900 w-[max-content] text-white px-4 py-2 inline-flex items-center gap-1 rounded-full focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 disabled:scale-100 disabled:bg-opacity-70 '
     >
       {pending ? (
         <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-white"></div>
