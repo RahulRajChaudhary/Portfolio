@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import { projects } from "@/lib/data";
 
-// Define project type
 type Project = {
   title: string;
   description: string;
@@ -33,7 +32,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0.01 }}
       transition={{ delay: index * 0.1, type: "spring", stiffness: 120 }}
       className="relative w-full sm:w-[300px] md:w-[330px] h-[400px] cursor-pointer"
       onClick={() => setIsFlipped(!isFlipped)}
@@ -52,25 +51,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           style={{ backfaceVisibility: "hidden" }}
           whileHover={{ scale: 1.02 }}
         >
-          {/* Image Background */}
-          {project.imageUrl && (
-            <motion.img
-              src={project.imageUrl}
-              alt={project.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 1 }}
-              animate={{ opacity: isHovered ? 0 : 1 }}
-              transition={{ duration: 0.4 }}
+          {/* Media Container */}
+          <div className="relative w-full h-[60%] overflow-hidden">
+            {/* Image Background - FIXED VISIBILITY */}
+            {project.imageUrl && (
+              <motion.img
+                src={project.imageUrl}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-contain"
+                initial={{ opacity: 1 }}
+                animate={{ opacity: isHovered ? 0 : 1 }}
+                transition={{ duration: 0.4 }}
+                style={{ zIndex: 10 }} // Ensure image stays on top
+              />
+            )}
+
+            {/* Video Overlay */}
+            <AnimatedVideoPreview
+              videoUrl={project.videoUrl}
+              isHovered={isHovered && !isFlipped}
             />
-          )}
+          </div>
 
-          {/* Video Overlay */}
-          <AnimatedVideoPreview
-            videoUrl={project.videoUrl}
-            isHovered={isHovered && !isFlipped}
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+          {/* FIXED: Gradient overlay with proper z-index */}
+          <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 z-20">
             <motion.h3
               className="text-2xl font-bold text-white"
               initial={{ opacity: 0, y: 10 }}
@@ -153,52 +157,54 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
 
           <motion.div
-            className="flex justify-end gap-4 mt-4"
+            className="flex justify-between items-center mt-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            {project.githubUrl && (
-              <motion.a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
-              >
-                <FaGithub className="w-5 h-5" />
-                <span>GitHub</span>
-              </motion.a>
-            )}
-            {project.demoUrl && (
-              <motion.a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 text-gray-700 hover:text-gray-900"
-              >
-                <FaExternalLinkAlt className="w-5 h-5" />
-                <span>Live Demo</span>
-              </motion.a>
-            )}
-          </motion.div>
-
-          <motion.div
-            className="mt-4 text-gray-400 text-sm flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            <span>Click to return</span>
             <motion.div
-              animate={{ x: [0, -5, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="text-gray-400 text-sm flex items-center gap-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
             >
-              ←
+              <span>Click to return</span>
+              <motion.div
+                animate={{ x: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+              >
+                ←
+              </motion.div>
             </motion.div>
+            
+            <div className="flex gap-4">
+              {project.githubUrl && (
+                <motion.a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-1 text-gray-700 hover:text-gray-900"
+                >
+                  <FaGithub className="w-5 h-5" />
+                </motion.a>
+              )}
+              {project.demoUrl && (
+                <motion.a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-1 text-gray-700 hover:text-gray-900"
+                >
+                  <FaExternalLinkAlt className="w-5 h-5" />
+                </motion.a>
+              )}
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -208,7 +214,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 function AnimatedVideoPreview({ videoUrl, isHovered }: { videoUrl?: string; isHovered: boolean }) {
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-t from-black/20 to-transparent">
       {videoUrl && (
         <motion.video
           src={videoUrl}
@@ -216,10 +222,11 @@ function AnimatedVideoPreview({ videoUrl, isHovered }: { videoUrl?: string; isHo
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="max-w-full max-h-full object-contain"
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.4 }}
+          style={{ zIndex: 5 }} // Lower z-index than image
         />
       )}
     </div>

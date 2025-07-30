@@ -37,11 +37,11 @@ export const projects = [
     githubUrl: "#"
   },
   {
-    title: "Task Management App",
-    description: "Collaborative task manager with real-time updates, drag-and-drop interface, and team management features.",
-    tags: ["React", "Firebase", "Redux", "Material UI"],
-    imageUrl: "/taskapp.jpg",
-    videoUrl: "/taskapp-demo.mp4",
+    title: "Interview Prepration AI",
+    description:"AI-powered MERN app that generates role-based interview Q&A with Gemini API, featuring JWT auth, session management, pinned questions, and a modern Tailwind UI.",
+    tags: ["MongoDB", "Express.js", "React", "Node.js", "Gemini API", "Tailwind CSS"],
+    imageUrl: "/preptrix.jpg",
+    videoUrl: "/preptrix-demo.mp4",
     demoUrl: "#",
     githubUrl: "#"
   },
