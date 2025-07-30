@@ -42,8 +42,8 @@ export const projects = [
     tags: ["MongoDB", "Express.js", "React", "Node.js", "Gemini API", "Tailwind CSS"],
     imageUrl: "/preptrix.jpg",
     videoUrl: "/preptrix-demo.mp4",
-    demoUrl: "#",
-    githubUrl: "#"
+    demoUrl: "https://preptrixfrontend.onrender.com/",
+    githubUrl: "https://github.com/RahulRajChaudhary/Preptrix"
   },
   {
     title: "Weather Dashboard",

@@ -51,18 +51,18 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           style={{ backfaceVisibility: "hidden" }}
           whileHover={{ scale: 1.02 }}
         >
-          {/* Media Container */}
-          <div className="relative w-full h-[60%] overflow-hidden">
-            {/* Image Background - FIXED VISIBILITY */}
+          {/* Media Container - FIXED SPACING */}
+          <div className="relative w-full h-[60%] bg-black overflow-hidden flex items-center justify-center">
+            {/* Image Background */}
             {project.imageUrl && (
               <motion.img
                 src={project.imageUrl}
                 alt={project.title}
-                className="absolute inset-0 w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: isHovered ? 0 : 1 }}
                 transition={{ duration: 0.4 }}
-                style={{ zIndex: 10 }} // Ensure image stays on top
+                style={{ zIndex: 10 }}
               />
             )}
 
@@ -73,7 +73,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             />
           </div>
 
-          {/* FIXED: Gradient overlay with proper z-index */}
+          {/* Gradient overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 z-20">
             <motion.h3
               className="text-2xl font-bold text-white"
@@ -214,7 +214,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 function AnimatedVideoPreview({ videoUrl, isHovered }: { videoUrl?: string; isHovered: boolean }) {
   return (
-    <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-t from-black/20 to-transparent">
+    <div className="absolute inset-0 w-full h-full bg-black flex items-center justify-center">
       {videoUrl && (
         <motion.video
           src={videoUrl}
@@ -222,11 +222,11 @@ function AnimatedVideoPreview({ videoUrl, isHovered }: { videoUrl?: string; isHo
           loop
           muted
           playsInline
-          className="max-w-full max-h-full object-contain"
+          className="w-full h-full object-cover"
           initial={{ opacity: 0 }}
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.4 }}
-          style={{ zIndex: 5 }} // Lower z-index than image
+          style={{ zIndex: 5 }}
         />
       )}
     </div>
