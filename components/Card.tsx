@@ -51,30 +51,63 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           style={{ backfaceVisibility: "hidden" }}
           whileHover={{ scale: 1.02 }}
         >
-          {/* Media Container - FIXED SPACING */}
-          <div className="relative w-full h-[60%] bg-black overflow-hidden flex items-center justify-center">
-            {/* Image Background */}
+          {/* Icons on front card */}
+          <div className="absolute top-4 right-4 z-30 flex gap-3">
+            {project.githubUrl && (
+              <motion.a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => e.stopPropagation()}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-black/50 text-white p-2 rounded-full backdrop-blur-sm"
+              >
+                <FaGithub className="w-4 h-4" />
+              </motion.a>
+            )}
+            {project.demoUrl && (
+              <motion.a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={e => e.stopPropagation()}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-black/50 text-white p-2 rounded-full backdrop-blur-sm"
+              >
+                <FaExternalLinkAlt className="w-4 h-4" />
+              </motion.a>
+            )}
+          </div>
+          
+          {/* Media Area - FIXED TO FILL 55% HEIGHT */}
+          <div className="relative w-full h-[55%] bg-black">
+            {/* Image - Fixed Position */}
             {project.imageUrl && (
-              <motion.img
-                src={project.imageUrl}
-                alt={project.title}
-                className="w-full h-full object-cover"
+              <motion.div
+                className="absolute inset-0 w-full h-full flex items-center justify-center"
                 initial={{ opacity: 1 }}
                 animate={{ opacity: isHovered ? 0 : 1 }}
                 transition={{ duration: 0.4 }}
-                style={{ zIndex: 10 }}
-              />
+              >
+                <img
+                  src={project.imageUrl}
+                  alt={project.title}
+                  className="w-full h-full object-contain scale-y-145"
+                />
+              </motion.div>
             )}
-
-            {/* Video Overlay */}
+            
+            {/* Video Overlay - Full Card */}
             <AnimatedVideoPreview
               videoUrl={project.videoUrl}
               isHovered={isHovered && !isFlipped}
             />
           </div>
 
-          {/* Gradient overlay */}
-          <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 z-20">
+          {/* Content Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 z-20">
             <motion.h3
               className="text-2xl font-bold text-white"
               initial={{ opacity: 0, y: 10 }}
@@ -176,35 +209,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 ←
               </motion.div>
             </motion.div>
-            
-            <div className="flex gap-4">
-              {project.githubUrl && (
-                <motion.a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={e => e.stopPropagation()}
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-1 text-gray-700 hover:text-gray-900"
-                >
-                  <FaGithub className="w-5 h-5" />
-                </motion.a>
-              )}
-              {project.demoUrl && (
-                <motion.a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={e => e.stopPropagation()}
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-1 text-gray-700 hover:text-gray-900"
-                >
-                  <FaExternalLinkAlt className="w-5 h-5" />
-                </motion.a>
-              )}
-            </div>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -214,21 +218,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 function AnimatedVideoPreview({ videoUrl, isHovered }: { videoUrl?: string; isHovered: boolean }) {
   return (
-    <div className="absolute inset-0 w-full h-full bg-black flex items-center justify-center">
+    <motion.div
+      className="absolute inset-0 w-full h-full flex items-center justify-center bg-black"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isHovered ? 1 : 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {videoUrl && (
-        <motion.video
+        <video
           src={videoUrl}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{ zIndex: 5 }}
+          className="w-full h-full object-contain "
         />
       )}
-    </div>
+    </motion.div>
   );
 }
