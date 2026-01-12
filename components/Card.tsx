@@ -38,7 +38,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     }
 
     // Otherwise, categorize based on tags (fallback)
-    const categories: any = {
+    const categories: { [key: string]: string[] } = {
       frontend: [],
       backend: [],
       database: [],
@@ -327,7 +327,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 >
                   <h4 className="text-sm font-semibold text-gray-700 mb-4">Tech Stack</h4>
                   <div className="space-y-5">
-                    {Object.entries(categorizedTags).map(([category, techs]: [string, any]) => (
+                    {Object.entries(categorizedTags).map(([category, techs]: [string,readonly string[]]) => (
                       <div key={category} className="space-y-3">
                         <div className="flex items-center gap-3">
                           <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100">
