@@ -127,7 +127,7 @@ export const projects = [
       "TypeScript",
       "Redis",
       "Vercel"
-    ],
+    ] as const,
     imageUrl: "/repomind.jpg",
     videoUrl: "/repomind-demo.mp4",
     demoUrl: "https://repo-mind.vercel.app",
@@ -153,7 +153,7 @@ export const projects = [
       "Tailwind CSS",
       "Redux",
       "JWT"
-    ],
+    ] as const,
     imageUrl: "/zestygo.jpg",
     videoUrl: "/zestygo-demo.mp4",
     demoUrl: "https://zestygo-rsl1.onrender.com",
@@ -179,7 +179,7 @@ export const projects = [
       "Microservices",
       "JWT",
       "Docker"
-    ],
+    ] as const,
     imageUrl: "/convox.jpg",
     videoUrl: "/convox-demo.mp4",
     demoUrl: "http://3.26.225.244:3000/login",
@@ -205,7 +205,7 @@ export const projects = [
       "Tailwind CSS",
       "JWT",
       "Context API"
-    ],
+    ] as const,
     imageUrl: "/preptrix.jpg",
     videoUrl: "/preptrix-demo.mp4",
     demoUrl: "https://preptrixfrontend.onrender.com/",
